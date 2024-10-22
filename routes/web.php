@@ -30,11 +30,11 @@ Route::get('test', function () {
     $user->notify(new \App\Notifications\NewComplaintSubmitted($complaint));
 });
 // Public routes
-Route::get('compliments/create', [ComplaintController::class, 'create'])->name('complaints.create');
-Route::post('compliments', [ComplaintController::class, 'store'])->name('complaints.store');
-Route::get('compliments/{complaint}/thank-you', [ComplaintController::class, 'thankYou'])->name('complaints.thank-you');
-Route::get('/compliments/search', [ComplaintController::class, 'searchForm'])->name('complaints.search');
-Route::get('/compliments/results', [ComplaintController::class, 'search'])->name('complaints.results');
+Route::get('system/create', [ComplaintController::class, 'create'])->name('complaints.create');
+Route::post('system', [ComplaintController::class, 'store'])->name('complaints.store');
+Route::get('system/{complaint}/thank-you', [ComplaintController::class, 'thankYou'])->name('complaints.thank-you');
+Route::get('/system/search', [ComplaintController::class, 'searchForm'])->name('complaints.search');
+Route::get('/system/results', [ComplaintController::class, 'search'])->name('complaints.results');
 
 // Authentication routes
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -49,18 +49,19 @@ Route::post('password/reset', [AuthController::class, 'reset'])->name('password.
 
 // Authenticated user routes
 Route::middleware(['auth'])->group(function () {
-    Route::get('compliments', [ComplaintController::class, 'index'])->name('complaints.index');
-    Route::get('compliments/{complaint}', [ComplaintController::class, 'show'])->name('complaints.show');
-    Route::post('compliments/{complaint}/messages', [MessageController::class, 'store'])->name('messages.store');
+    Route::get('system', [ComplaintController::class, 'index'])->name('complaints.index');
+    Route::get('system/{complaint}', [ComplaintController::class, 'show'])->name('complaints.show');
+    Route::post('system/{complaint}/messages', [MessageController::class, 'store'])->name('messages.store');
+    Route::post('/system/{complaint}/add-attachment', [ComplaintController::class, 'addAttachment'])->name('complaints.add-attachment');
 });
 
 // Admin and Subadmin routes
 Route::middleware(['auth', 'role:admin,subadmin'])->group(function () {
     Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('admin/compliments', [AdminController::class, 'complaintsList'])->name('admin.complaints.index');
-    Route::get('admin/compliments/{complaint}', [AdminController::class, 'showComplaint'])->name('admin.complaints.show');
-    Route::post('admin/compliments/{complaint}/assign', [AdminController::class, 'assignComplaint'])->name('admin.complaints.assign');
-    Route::patch('admin/compliments/{complaint}/status', [AdminController::class, 'updateStatus'])->name('admin.complaints.update-status');
-    Route::post('admin/compliments/{complaint}/notes', [AdminController::class, 'addNote'])->name('admin.complaints.add-note');
-    Route::post('admin/compliments/{complaint}/notes', [AdminController::class, 'addNote'])->name('complaints.add-note');
+    Route::get('admin/system', [AdminController::class, 'complaintsList'])->name('admin.complaints.index');
+    Route::get('admin/system/{complaint}', [AdminController::class, 'showComplaint'])->name('admin.complaints.show');
+    Route::post('admin/system/{complaint}/assign', [AdminController::class, 'assignComplaint'])->name('admin.complaints.assign');
+    Route::patch('admin/system/{complaint}/status', [AdminController::class, 'updateStatus'])->name('admin.complaints.update-status');
+    Route::post('admin/system/{complaint}/notes', [AdminController::class, 'addNote'])->name('admin.complaints.add-note');
+    Route::post('admin/system/{complaint}/notes', [AdminController::class, 'addNote'])->name('complaints.add-note');
 });
