@@ -88,11 +88,6 @@
                                 <input type="datetime-local" class="form-control" id="incident_date" name="incident_date" required>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="card mb-4">
-                    <div class="card-body">
                         <h5 class="card-title">Officer Information</h5>
                         <div class="mb-3">
                             <label for="officer_name" class="form-label">Officer Name</label>

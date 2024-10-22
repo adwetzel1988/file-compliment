@@ -121,6 +121,11 @@ class ComplaintController extends Controller
 
     public function searchForm()
     {
+        // block access if user is not authenticated and not an admin
+        if (!auth()->check() || auth()->user()->role !== 'admin') {
+            return redirect(route('login'));
+        }
+
         return view('complaints.search');
     }
 
