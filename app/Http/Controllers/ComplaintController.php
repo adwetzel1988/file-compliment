@@ -16,6 +16,10 @@ class ComplaintController extends Controller
 {
     public function create()
     {
+        if (!auth()->guest() && str_contains(auth()->user()->role, 'admin')) {
+            return redirect()->route('home');
+        }
+
         return view('complaints.create');
     }
 

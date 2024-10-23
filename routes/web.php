@@ -19,16 +19,15 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::get('/', function () {
+    // if user has role containing 'admin', redirect to admin.system.index
+    if (!auth()->guest() && str_contains(auth()->user()->role, 'admin')) {
+        return redirect()->route('admin.complaints.index');
+    }
     return view('welcome');
-});
+})->name('home');
 
 //Route::get('complaints/create', [ComplaintController::class, 'create'])->name('home');
 
-Route::get('test', function () {
-    $user = \App\Models\User::first();
-    $complaint = \App\Models\Complaint::first();
-    $user->notify(new \App\Notifications\NewComplaintSubmitted($complaint));
-});
 // Public routes
 Route::get('system/create', [ComplaintController::class, 'create'])->name('complaints.create');
 Route::post('system', [ComplaintController::class, 'store'])->name('complaints.store');

@@ -30,9 +30,11 @@
                 </div>
             </div>
 
+            @if(!str_contains(auth()->user()->role, 'admin'))
             <div class="text-center mb-5"> <!-- Added mb-5 for more bottom margin -->
                 <a href="{{ route('complaints.create') }}" class="btn btn-success btn-lg">File a Compliment</a>
             </div>
+            @endif
 
         </div>
     </div>
