@@ -42,10 +42,10 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                <div class="d-flex flex-column align-items-center">
-                    <img src="/logo.jpg" alt="Logo" style="height: 40px;">
-                    <span>File Compliment</span>
+            <a class="navbar-brand" href="{{ url('/') }}" style="width: 250px">
+                <div class="d-flex flex align-items-center">
+                    <img src="/logo.png" alt="Logo" style="height: 40px;margin-right: 7px">
+                    <span style="color: #2c3e50;">File Compliment</span>
                 </div>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
